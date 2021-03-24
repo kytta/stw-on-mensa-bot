@@ -107,4 +107,3 @@ jobs:
         file: "./dist/*"
         release_id: ${{ steps.create_release.outputs.id }}
         overwrite: true
-        branches: main
