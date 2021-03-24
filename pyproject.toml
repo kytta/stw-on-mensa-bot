@@ -31,7 +31,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-target-version = ['py36', 'py37', 'py38', 'py39']
+target-version = ['py36']
 exclude = '/(\.git | dist)/'
 
 [tool.isort]
