@@ -12,7 +12,7 @@ packages = [
 include = [
 	"CHANGELOG.md",
 	"LICENSE",
-	"README.*.md"
+	"README*.md"
 ]
 
 [tool.poetry.urls]
