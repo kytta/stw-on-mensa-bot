@@ -11,4 +11,4 @@
 
 ## Lizenz
 
-ISC © 2021, Nikita Karamov
+Dies ist freie und lastenfreie Software, die für die Öffentlichkeit freigegeben ist.

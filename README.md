@@ -11,4 +11,4 @@
 
 ## Licence
 
-ISC © 2021, Nikita Karamov
+This is free and unencumbered software released into the public domain.

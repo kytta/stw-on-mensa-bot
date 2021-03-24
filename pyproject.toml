@@ -2,7 +2,7 @@
 name = "stw-on-mensa-bot"
 version = "0.0.1"
 description = "Telegram Bot with schedules and meal plans of canteens and cafeterias of Studentenwerk OstNiedersachsen"
-license = "ISC"
+license = "Unlicense"
 authors = ["Nikita Karamov <nick@karamoff.dev>"]
 readme = "README.md"
 repository = "https://github.com/NickKaramoff/stw-on-mensa-bot"
