@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stw-on-mensa-bot"
-version = "0.1.0"
+version = "0.0.1"
 description = "Telegram Bot with schedules and meal plans of canteens and cafeterias of Studentenwerk OstNiedersachsen"
 license = "ISC"
 authors = ["Nikita Karamov <nick@karamoff.dev>"]
