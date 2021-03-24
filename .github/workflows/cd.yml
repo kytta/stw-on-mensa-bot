@@ -1,0 +1,99 @@
+name: Lint, test, build and optionally release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-black:
+    name: Lint code style
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python 3
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - name: Lint
+      uses: psf/black@stable
+      with:
+        args: ". --check --diff"
+  
+  lint-isort:
+    name: Lint imports
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python 3
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - name: Setup Poetry
+      uses: Gr1N/setup-poetry@v4
+    - name: Install dependencies
+      run: poetry install
+    - name: Lint
+      uses: jamescurtin/isort-action@master
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    - name: Setup Poetry
+      uses: Gr1N/setup-poetry@v4
+    - name: Install dependencies
+      run: poetry install
+    - name: Test
+      run: poetry run pytest
+
+  release:
+    name: Build and release
+    needs: [lint-black, lint-isort, test]
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python 3
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - name: Setup Poetry
+      uses: Gr1N/setup-poetry@v4
+    - name: Install dependencies
+      run: poetry install
+    - name: Build
+      run: poetry build
+    - name: Publish
+      uses: xresloader/upload-to-github-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        file: "./dist/*"
+        tags: true
+        draft: true
+        branches: main
